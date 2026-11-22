@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About EcoGuard: our inspiration and mission, water pollution awareness, water quality basics, ways to get involved and answers to common questions.">
+    <title>About | EcoGuard</title>
+    <link rel="icon" href="assets/ecoguard-logo.png">
+    <link rel="stylesheet" href="ecoguard.css">
+    <link rel="stylesheet" href="about.css">
+</head>
+
+<body>
+
+<!-- ===== SHARED HEADER (same on every page; current page is highlighted) ===== -->
+<header class="site-header">
+    <nav class="site-navigation" aria-label="Main navigation">
+        <a href="index.html" class="brand" aria-label="EcoGuard home">
+            <img src="assets/ecoguard-logo.png" alt="" class="brand-logo" width="58" height="58">
+            <span class="brand-name">EcoGuard</span>
+        </a>
+
+        <ul class="primary-nav" id="primary-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="map.html">Interactive Map</a></li>
+            <li><a href="report.html">Report Pollution</a></li>
+            <li><a href="tracking.html">Track Reports</a></li>
+            <li><a href="about.html" class="active" aria-current="page">About</a></li>
+        </ul>
+
+        <a href="report.html" class="nav-cta">+ New Report</a>
+
+        <!-- Mobile menu button (shown under 900px, handled in ecoguard.js) -->
+        <button class="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+</header>
+
+<main>
+
+    <!-- ===== HERO (photo layers set in about.css, with fallbacks) ===== -->
+    <section class="photo-hero about-hero">
+        <div class="container" data-reveal="fade-up">
+            <p class="eyebrow light">EXPLORE MORE</p>
+            <h1>Protecting Our Water, Together.</h1>
+            <!-- Original page introduction -->
+            <p class="about-hero-lead">
+                Learn more about EcoGuard, discover useful
+                environmental information and find ways to
+                get involved in protecting our water resources.
+            </p>
+            <nav class="about-jump" aria-label="On this page">
+                <a href="#about">About</a>
+                <a href="#learn">Learn</a>
+                <a href="#community">Community</a>
+                <a href="#support">FAQ &amp; Support</a>
+            </nav>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="section" id="about" aria-labelledby="about-title">
+        <div class="container">
+            <div class="section-heading" data-reveal="fade-up">
+                <p class="eyebrow">ABOUT</p>
+                <h2 id="about-title">Who we are and why we started</h2>
+            </div>
+
+            <div class="about-grid">
+                <!-- About EcoGuard -->
+                <article class="about-card about-card-wide" id="about-ecoguard" data-reveal="fade-up">
+                    <h3>About EcoGuard</h3>
+                    <p>
+                        EcoGuard is a community-based platform designed
+                        to raise awareness and address industrial
+                        wastewater pollution in Hanoi, Vietnam.
+                    </p>
+                    <p>
+                        Through our platform, residents can report
+                        suspected water pollution, share relevant
+                        information, explore reported locations
+                        and track the progress of their submissions.
+                    </p>
+                    <p>
+                        We aim to connect local communities with
+                        environmental authorities and encourage
+                        everyone to take part in protecting
+                        our water resources.
+                    </p>
+                    <p class="prototype-note">
+                        <span class="demo-chip">Student prototype</span>
+                        EcoGuard is currently a student project. Reports are saved only in your browser
+                        and are not sent to, or reviewed by, any authority.
+                    </p>
+                </article>
+
+                <!-- Our Inspirations -->
+                <article class="about-card" id="our-inspirations" data-reveal="fade-up">
+                    <span class="about-icon" aria-hidden="true">&#128161;</span>
+                    <h3>Our Inspirations</h3>
+                    <p>
+                        EcoGuard was inspired by growing concerns
+                        about industrial wastewater pollution
+                        and its impact on water quality,
+                        public health and the environment.
+                    </p>
+                    <p>
+                        We believe that local communities play
+                        an important role in identifying
+                        environmental concerns. However,
+                        residents may not always have an
+                        accessible way to report pollution
+                        or communicate their concerns.
+                    </p>
+                    <p>
+                        This inspired us to create a platform
+                        that gives people a voice and encourages
+                        collective action towards a cleaner
+                        and healthier environment.
+                    </p>
+                </article>
+
+                <!-- Our Mission -->
+                <article class="about-card" id="our-mission" data-reveal="fade-up">
+                    <span class="about-icon" aria-hidden="true">&#127919;</span>
+                    <h3>Our Mission</h3>
+                    <p>
+                        Our mission is to make environmental
+                        reporting more accessible, transparent
+                        and community-driven.
+                    </p>
+                    <p>We aim to:</p>
+                    <ul class="check-list">
+                        <li>Encourage residents to report suspected industrial wastewater pollution.</li>
+                        <li>Raise awareness about water pollution and environmental protection.</li>
+                        <li>Improve communication between local communities and environmental authorities.</li>
+                        <li>Support a cleaner, safer and more sustainable water environment.</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LEARN ===== -->
+    <section class="section section-alt" id="learn" aria-labelledby="learn-title">
+        <div class="container">
+            <div class="section-heading" data-reveal="fade-up">
+                <p class="eyebrow">LEARN</p>
+                <h2 id="learn-title">Understanding water pollution</h2>
+            </div>
+
+            <!-- Water Pollution Awareness (footer link "Industrial Wastewater" points here) -->
+            <article class="learn-feature" id="problem" data-reveal="fade-up">
+                <div class="learn-photo" role="img" aria-label="Water-quality testing (photo placeholder until the team adds one)"></div>
+                <div class="learn-copy" id="water-pollution-awareness">
+                    <h3>Water Pollution Awareness</h3>
+                    <p>
+                        Industrial wastewater can contain harmful
+                        substances that negatively affect rivers,
+                        aquatic ecosystems and human health.
+                    </p>
+                    <p>
+                        Understanding the causes and consequences
+                        of water pollution is an important step
+                        towards protecting our environment.
+                    </p>
+                    <p>
+                        Common concerns include untreated
+                        wastewater discharge, chemical
+                        contamination and improper waste disposal.
+                    </p>
+                </div>
+            </article>
+
+            <div class="learn-grid">
+                <!-- Water Quality Information -->
+                <article class="about-card" id="water-quality" data-reveal="fade-up">
+                    <span class="about-icon" aria-hidden="true">&#128167;</span>
+                    <h3>Water Quality Information</h3>
+                    <p>
+                        Water quality can be evaluated through
+                        different indicators that help determine
+                        the condition of a water source.
+                    </p>
+                    <dl class="indicator-list">
+                        <div><dt>pH</dt><dd>Measures how acidic or alkaline the water is.</dd></div>
+                        <div><dt>DO (Dissolved Oxygen)</dt><dd>Measures the amount of oxygen dissolved in water, which is important for aquatic life.</dd></div>
+                        <div><dt>BOD (Biochemical Oxygen Demand)</dt><dd>Indicates the oxygen needed by microorganisms to break down organic matter.</dd></div>
+                        <div><dt>COD (Chemical Oxygen Demand)</dt><dd>Measures the oxygen equivalent required to chemically oxidise substances in water.</dd></div>
+                    </dl>
+                    <p>
+                        These indicators help environmental
+                        specialists assess water quality and
+                        identify potential pollution problems.
+                    </p>
+                    <a class="text-link" href="map.html#water-quality">See how the map's severity score uses them &rarr;</a>
+                </article>
+
+                <!-- Environmental Tips -->
+                <article class="about-card" id="environmental-tips" data-reveal="fade-up">
+                    <span class="about-icon" aria-hidden="true">&#127793;</span>
+                    <h3>Environmental Tips</h3>
+                    <p>
+                        Everyone can contribute to protecting
+                        water resources through small,
+                        everyday actions.
+                    </p>
+                    <ul class="check-list">
+                        <li>Avoid pouring chemicals, oils and harmful substances into drains.</li>
+                        <li>Reduce the use of single-use plastics.</li>
+                        <li>Dispose of household waste properly.</li>
+                        <li>Participate in local river and waterway clean-up activities.</li>
+                        <li>Report suspected water pollution through appropriate channels.</li>
+                        <li>Share environmental knowledge with family and friends.</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== COMMUNITY ===== -->
+    <section class="section photo-hero about-community" id="community" aria-labelledby="community-title">
+        <div class="container">
+            <div class="section-heading" data-reveal="fade-up">
+                <p class="eyebrow light">COMMUNITY</p>
+                <h2 id="community-title">Get involved</h2>
+            </div>
+            <div class="community-grid">
+                <!-- Get Involved -->
+                <article class="glass-card" id="get-involved" data-reveal="fade-up">
+                    <h3>Get Involved</h3>
+                    <p>
+                        Protecting water resources is a shared
+                        responsibility. Everyone can make
+                        a difference by taking part in
+                        environmental activities.
+                    </p>
+                    <ul class="check-list light">
+                        <li>Report suspected industrial wastewater pollution.</li>
+                        <li>Participate in community environmental campaigns.</li>
+                        <li>Help spread awareness about water pollution.</li>
+                        <li>Encourage responsible waste management in your community.</li>
+                    </ul>
+                    <p>
+                        Together, we can build a community
+                        that cares about clean water
+                        and environmental sustainability.
+                    </p>
+                    <a href="report.html" class="btn btn-light btn-small">Report Pollution</a>
+                </article>
+
+                <!-- News and Updates -->
+                <article class="glass-card" id="news-updates" data-reveal="fade-up">
+                    <h3>News &amp; Updates</h3>
+                    <p>
+                        Stay informed about environmental
+                        issues, water pollution developments
+                        and community activities.
+                    </p>
+                    <p>
+                        This section is dedicated to sharing
+                        relevant environmental news,
+                        project announcements and updates
+                        about EcoGuard.
+                    </p>
+                    <p>
+                        Check back for future updates
+                        and environmental initiatives.
+                    </p>
+                    <a href="index.html#news" class="btn btn-ghost-light btn-small">Read the team's news picks</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SUPPORT ===== -->
+    <section class="section" id="support" aria-labelledby="support-title">
+        <div class="container">
+            <div class="section-heading" data-reveal="fade-up">
+                <p class="eyebrow">SUPPORT</p>
+                <h2 id="support-title">Questions and help</h2>
+            </div>
+
+            <div class="support-grid">
+                <!-- FAQ (accordion using <details>, works without JavaScript) -->
+                <article class="faq" id="faq" data-reveal="fade-up">
+                    <h3>Frequently Asked Questions</h3>
+
+                    <details class="faq-item" open>
+                        <summary>1. What is EcoGuard?</summary>
+                        <p>
+                            EcoGuard is a community-based platform
+                            that helps residents report suspected
+                            industrial wastewater pollution and
+                            access environmental information.
+                            It is currently a student prototype.
+                        </p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>2. How can I report water pollution?</summary>
+                        <p>
+                            Visit the <a href="report.html">Report Pollution</a> page, provide
+                            details about the suspected pollution
+                            and upload supporting photos if available.
+                        </p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>3. Can I track my submitted report?</summary>
+                        <p>
+                            Yes. Visit the <a href="tracking.html">Track Reports</a> page to check
+                            the progress and status of your report,
+                            if tracking is available for your submission.
+                            In this prototype, the status stages are a demonstration
+                            and reports are stored only in your browser.
+                        </p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>4. Is EcoGuard free to use?</summary>
+                        <p>
+                            EcoGuard is designed as a free
+                            community platform to encourage
+                            public participation in environmental
+                            protection.
+                        </p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>5. Does EcoGuard directly investigate pollution?</summary>
+                        <p>
+                            No. EcoGuard provides a channel for
+                            reporting suspected pollution.
+                            Relevant environmental authorities
+                            are responsible for verifying reports
+                            and conducting investigations.
+                            This prototype does not send reports to any authority.
+                        </p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>6. Why is reporting water pollution important?</summary>
+                        <p>
+                            Reporting suspected pollution helps
+                            bring environmental concerns to the
+                            attention of relevant authorities
+                            and encourages community involvement.
+                        </p>
+                    </details>
+                </article>
+
+                <div class="support-side">
+                    <!-- Resources and Guidelines -->
+                    <article class="about-card" id="resources" data-reveal="fade-up">
+                        <h3>Resources &amp; Guidelines</h3>
+                        <p>
+                            Find useful guidance and information
+                            to help you understand environmental
+                            issues and use EcoGuard effectively.
+                        </p>
+                        <ul class="resource-list">
+                            <li><a href="index.html#guide">How to identify and report suspected water pollution.</a></li>
+                            <li><a href="report.html">Guidelines for submitting clear and useful reports.</a></li>
+                            <li><a href="#problem">Basic information about industrial wastewater.</a></li>
+                            <li><a href="#environmental-tips">Environmental protection guidelines and educational materials.</a></li>
+                        </ul>
+                    </article>
+
+                    <!-- Contact Us -->
+                    <article class="about-card contact-card" id="contact" data-reveal="fade-up">
+                        <h3>Contact Us</h3>
+                        <p>
+                            Have questions, suggestions or feedback?
+                            Feel free to reach out to our team
+                            through Microsoft Teams.
+                        </p>
+                        <p>
+                            We are always happy to hear your ideas
+                            and answer any questions about EcoGuard.
+                        </p>
+                        <p><strong>Contact our team:</strong></p>
+                        <a class="btn btn-primary btn-small"
+                           href="https://teams.microsoft.com/l/channel/19%3AeupvcjuZV7cesk1J2PkYMNipcJbMMhsnzBULLTiDaNs1%40thread.tacv2/General?groupId=195745c8-dd66-4c95-8e8e-09dfa07ebcd7&amp;tenantId=e8911c26-cf9f-4a9c-878e-527807be8791"
+                           target="_blank" rel="noopener noreferrer">
+                            Connect with us on Microsoft Teams <span aria-hidden="true">&#8599;</span>
+                        </a>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ===== SHARED FOOTER ===== -->
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <a href="index.html" class="footer-logo">
+                <img src="assets/ecoguard-logo.png" alt="" class="footer-brand-logo" width="57" height="57">
+                <span class="footer-brand-name">EcoGuard</span>
+            </a>
+            <p class="footer-description">
+                Protect Our Water, Protect Our Future. A student prototype that helps
+                residents learn about industrial wastewater pollution and record what
+                they observe in local waterways.
+            </p>
+        </div>
+
+        <div class="footer-column">
+            <h2>Quick Links</h2>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="map.html">Interactive Map</a></li>
+                <li><a href="report.html">Report Pollution</a></li>
+                <li><a href="tracking.html">Track Reports</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h2>Explore</h2>
+            <ul>
+                <li><a href="map.html#water-quality">Water Quality</a></li>
+                <li><a href="about.html#problem">Industrial Wastewater</a></li>
+                <li><a href="about.html#learn">Environmental Awareness</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h2>Get Involved</h2>
+            <p>Notice something unusual in a local waterway? Record what you saw and where it happened.</p>
+            <a href="report.html" class="footer-button">Submit a Report <span aria-hidden="true">&rarr;</span></a>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 EcoGuard. Protecting Water, Protecting Life. &middot; Student prototype. Reports and measurements shown are demo or simulated data.</p>
+        <p class="footer-tagline">Protecting Our Water, Protecting Our Future.</p>
+    </div>
+</footer>
+
+    <script src="ecoguard.js" defer></script>
+
+</body>
+</html>

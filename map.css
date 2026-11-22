@@ -1,0 +1,419 @@
+/* =========================================================
+   ECOGUARD | INTERACTIVE MAP PAGE STYLES
+   Shared header, footer, buttons, badges: ecoguard.css
+========================================================= */
+
+/* ---------- Hero ---------- */
+.map-hero {
+    /* Brief photo first, then a team image, then the .photo-hero gradient. */
+    --hero-image: url("assets/images/map-waterway-context.jpg"), url("assets/images/team-wastewater-treatment.avif");
+    padding: 78px 0 70px;
+}
+.map-hero-inner { max-width: 1240px; }
+.map-hero h1 {
+    max-width: 760px;
+    margin: 0 0 16px;
+    font-size: clamp(36px, 5vw, 58px);
+    line-height: 1.08;
+    letter-spacing: -0.6px;
+}
+.map-hero-lead { max-width: 680px; margin: 0 0 20px; color: rgba(255,255,255,0.9); font-size: 19px; }
+.map-hero-note {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    max-width: 720px;
+    margin: 0;
+    padding: 12px 16px;
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 12px;
+    background: rgba(8,38,32,0.38);
+    color: rgba(255,255,255,0.92);
+    font-size: 15px;
+}
+
+/* ---------- Section head + toolbar ---------- */
+.map-section-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px 24px;
+    margin-bottom: 18px;
+}
+.map-section-head h2 { margin: 0 0 6px; color: var(--eco-forest); font-size: clamp(28px, 3vw, 36px); }
+.map-section-head p { margin: 0; color: var(--eco-muted); }
+.map-count { font-weight: 700; color: var(--eco-teal) !important; }
+
+.map-toolbar {
+    display: grid;
+    grid-template-columns: auto repeat(3, minmax(0, 1fr)) auto;
+    align-items: end;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding: 16px 18px;
+    border: 1px solid var(--eco-border);
+    border-radius: var(--eco-radius);
+    background: #fff;
+    box-shadow: var(--eco-shadow-soft);
+}
+.layer-toggles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+.layer-toggles legend { width: 100%; margin-bottom: 5px; padding: 0; color: #415a5f; font-size: 13px; font-weight: 700; }
+.toggle { display: inline-flex; align-items: center; gap: 7px; min-height: 42px; cursor: pointer; white-space: nowrap; }
+.toggle input { width: 17px; height: 17px; accent-color: var(--eco-teal); }
+.toggle input:disabled + .toggle-dot { opacity: 0.4; }
+.toggle-dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; }
+.toggle-dot.station { background: linear-gradient(135deg, #c93b2b, #25845e); }
+.toggle-dot.report { border: 2px solid var(--eco-water); background: #fff; }
+
+.toolbar-field label { display: block; margin: 0 0 5px; color: #415a5f; font-size: 13px; font-weight: 700; }
+.toolbar-field select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #cfdfd9;
+    border-radius: 9px;
+    color: var(--eco-ink);
+    background: #fff;
+    font-size: 15px;
+}
+.toolbar-field select:focus { border-color: var(--eco-teal); outline: none; box-shadow: 0 0 0 3px rgba(8,127,131,0.12); }
+.map-toolbar .btn { height: 42px; }
+
+/* ---------- Map + sidebar layout ---------- */
+.map-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 370px;
+    gap: 22px;
+    align-items: start;
+}
+.map-column { display: grid; gap: 22px; min-width: 0; }
+
+.map-frame {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--eco-border);
+    border-radius: var(--eco-radius);
+    background: #e7efe9;
+    box-shadow: var(--eco-shadow-card);
+}
+.map-canvas { height: 600px; width: 100%; background: #e7efe9; font-family: var(--eco-font); }
+.map-canvas.tiles-failed .leaflet-tile-pane { display: none; }
+
+.map-notice {
+    position: absolute;
+    z-index: 800;
+    top: 12px;
+    left: 60px;
+    right: 12px;
+    margin: 0;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: rgba(255,248,230,0.97);
+    color: #6b4a07;
+    border: 1px solid #ecd28e;
+    font-size: 14px;
+}
+.map-legend {
+    position: absolute;
+    z-index: 700;
+    left: 12px;
+    bottom: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    max-width: calc(100% - 24px);
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.94);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    font-size: 13px;
+}
+.map-legend span { display: inline-flex; align-items: center; gap: 5px; }
+.dot { display: inline-block; width: 11px; height: 11px; border-radius: 50%; flex: 0 0 auto; }
+.report-dot { background: #fff; border: 2px solid var(--eco-water); }
+
+/* Leaflet font + controls */
+.leaflet-container { font-family: var(--eco-font); }
+.leaflet-container a.leaflet-popup-close-button { font-size: 20px; }
+
+/* Station pin (original teardrop design, shows the score) */
+.station-icon, .report-icon { background: none; border: 0; }
+.pin {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border: 2px solid #fff;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.28);
+    transition: transform 0.2s ease;
+}
+.pin > span { transform: rotate(45deg); color: #fff; font-size: 13px; font-weight: 700; }
+.station-icon:hover .pin, .fallback-marker:hover .pin, .fallback-marker.active .pin { transform: rotate(-45deg) scale(1.15); }
+
+/* Community report pin */
+.report-pin {
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border: 3px solid var(--c, #7b8a8f);
+    border-radius: 50%;
+    background: #fff;
+    color: var(--c, #7b8a8f);
+    font-weight: 700;
+    font-size: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+.report-pin.mine { background: var(--c, #7b8a8f); color: #fff; animation: eco-pulse 2s infinite; }
+
+/* Popups */
+.popup { min-width: 190px; font-size: 14px; }
+.popup p { margin: 6px 0; }
+.popup strong { display: block; color: var(--eco-forest); font-size: 16px; line-height: 1.25; }
+.popup-kind { color: var(--eco-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.popup-loc { color: var(--eco-muted); }
+.popup .status-badge { font-size: 12px; padding: 3px 9px; }
+.popup-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 8px; }
+.popup-btn {
+    padding: 6px 12px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--eco-teal);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.popup-btn:hover { background: var(--eco-forest); }
+.popup-link { color: var(--eco-teal); font-weight: 700; }
+
+.score-pill {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* ---------- Details panel ---------- */
+.detail-panel {
+    padding: 22px;
+    border: 1px solid var(--eco-border);
+    border-radius: var(--eco-radius);
+    background: #fff;
+    box-shadow: var(--eco-shadow-soft);
+    outline: none;
+}
+.detail-empty { margin: 0; color: var(--eco-muted); text-align: center; }
+.detail-grid { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 22px; }
+.detail-grid.no-photo { grid-template-columns: 1fr; }
+.detail-photo { margin: 0; }
+.detail-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 12px; background: #dfe9e4; }
+.detail-photo figcaption { margin-top: 8px; color: var(--eco-muted); font-size: 13px; font-style: italic; }
+.detail-top { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.detail-top h3 { margin: 2px 0 4px; color: var(--eco-forest); font-size: 24px; line-height: 1.2; }
+.detail-kind { margin: 0; color: var(--eco-muted); font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
+.detail-sub { margin: 0; color: var(--eco-muted); }
+.detail-rank { margin: 10px 0 14px; font-weight: 700; color: var(--eco-teal); }
+.detail-body h4 { margin: 0 0 10px; color: var(--eco-forest); font-size: 16px; }
+.origin-mine { color: var(--eco-leaf); font-weight: 700; }
+
+.subscore-chart { display: grid; gap: 9px; margin: 0; padding: 0; list-style: none; }
+.subscore-chart li { display: grid; grid-template-columns: 130px minmax(0, 1fr) 96px; align-items: center; gap: 10px; font-size: 14px; }
+.bar-label { display: flex; flex-direction: column; font-weight: 700; line-height: 1.2; }
+.bar-label small, .bar-value small { color: var(--eco-muted); font-weight: 400; font-size: 12px; }
+.bar-value { display: flex; flex-direction: column; text-align: right; font-weight: 700; line-height: 1.2; }
+.bar-track { display: block; height: 10px; overflow: hidden; border-radius: 10px; background: #e8efec; }
+.bar-fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--eco-leaf), var(--eco-teal));
+    transition: width 0.8s cubic-bezier(.2,.7,.2,1);
+}
+.bars-ready .bar-fill { width: var(--w); }
+.detail-foot { margin: 14px 0 0; color: var(--eco-muted); font-size: 13px; }
+.detail-foot a { color: var(--eco-teal); font-weight: 700; }
+
+.detail-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 16px; margin: 14px 0; }
+.detail-facts div { padding: 8px 10px; border-radius: 9px; background: var(--eco-pale); }
+.detail-facts dt { color: var(--eco-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; }
+.detail-facts dd { margin: 2px 0 0; font-weight: 700; }
+.detail-progress { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 12px; margin: 0 0 16px; font-weight: 700; }
+
+/* ---------- Ranking sidebar (original team design) ---------- */
+.ranking-panel {
+    position: sticky;
+    top: 96px;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 116px);
+    border: 1px solid var(--eco-border);
+    border-radius: var(--eco-radius);
+    background: #fff;
+    box-shadow: var(--eco-shadow-soft);
+    overflow: hidden;
+}
+.ranking-head { padding: 18px 18px 12px; border-bottom: 1px solid var(--eco-border); background: var(--eco-pale); }
+.ranking-head h2 { margin: 0 0 6px; color: var(--eco-forest); font-size: 20px; line-height: 1.25; }
+.ranking-head p { margin: 0 0 10px; color: var(--eco-muted); font-size: 14px; }
+.legend-strip { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 13px; }
+.legend-item { display: inline-flex; align-items: center; gap: 5px; }
+
+.rank-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; margin: 0; padding: 12px; overflow-y: auto; list-style: none; }
+.rank-list > li { min-width: 0; } /* lets long station names shorten with "…" instead of overflowing */
+.rank-card {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--eco-border);
+    border-radius: 12px;
+    background: #fff;
+    color: var(--eco-ink);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+.rank-card:hover { border-color: var(--eco-teal); box-shadow: 0 8px 18px rgba(19,66,53,0.09); transform: translateY(-1px); }
+.rank-card.active { border-color: var(--eco-teal); background: var(--eco-pale-blue); box-shadow: inset 4px 0 0 var(--eco-teal); }
+.rank-card.is-filtered { opacity: 0.45; }
+.rc-row1 { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.rc-left { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.rc-pos { flex: 0 0 auto; color: var(--eco-teal); font-weight: 700; }
+.rc-name { overflow: hidden; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+.rc-score { flex: 0 0 auto; padding: 2px 9px; border-radius: 999px; color: #fff; font-size: 13px; font-weight: 700; }
+.rc-meta { display: flex; flex-wrap: wrap; gap: 2px 10px; margin-top: 6px; color: var(--eco-muted); font-size: 12.5px; }
+.rc-meta b { color: var(--eco-ink); }
+
+/* ---------- Fallback schematic map (no Leaflet) ---------- */
+.map-canvas.is-fallback { height: auto; overflow: auto; }
+.fallback-world { position: relative; width: 100%; aspect-ratio: 2100 / 1400; }
+.fallback-world canvas { display: block; width: 100%; height: 100%; }
+.fallback-marker {
+    position: absolute;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    transform: translate(-50%, -100%);
+}
+.fallback-marker .pin { width: 28px; height: 28px; }
+.fallback-marker .pin > span { font-size: 11px; }
+
+/* ---------- Water quality explainer ---------- */
+.param-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.param-card {
+    padding: 22px;
+    border: 1px solid var(--eco-border);
+    border-top: 4px solid var(--eco-teal);
+    border-radius: var(--eco-radius);
+    background: #fff;
+    box-shadow: var(--eco-shadow-soft);
+}
+.param-card h3 { margin: 0 0 10px; color: var(--eco-forest); font-size: 24px; }
+.param-card h3 small { display: block; color: var(--eco-muted); font-size: 14px; font-weight: 400; font-style: italic; }
+.param-card p { margin: 0 0 10px; }
+.param-meta { color: #415a5f; font-size: 14px; }
+.param-range { margin: 0 !important; padding: 7px 10px; border-radius: 8px; background: var(--eco-pale-blue); color: var(--eco-water); font-size: 14px; font-weight: 700; }
+.param-range:empty { display: none; }
+.param-card-muted { border-top-color: #9aa9ad; background: #fafcfb; }
+
+.formula-box {
+    max-width: 860px;
+    margin: 36px auto 0;
+    padding: 26px;
+    border: 1px solid var(--eco-border);
+    border-radius: var(--eco-radius);
+    background: #fff;
+    box-shadow: var(--eco-shadow-soft);
+}
+.formula-box h3 { margin: 0 0 8px; color: var(--eco-forest); font-size: 24px; }
+.formula-box pre {
+    overflow-x: auto;
+    margin: 14px 0;
+    padding: 16px 18px;
+    border-radius: 12px;
+    background: var(--eco-forest-deep);
+    color: #dff5e8;
+    font-family: var(--eco-font);
+    font-size: 14px;
+    line-height: 1.6;
+}
+.formula-note { margin: 0; color: var(--eco-muted); font-size: 14px; font-style: italic; }
+
+/* ---------- Call to action ---------- */
+.map-cta-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px 32px;
+    padding: 34px 38px;
+    border-radius: 22px;
+    color: #fff;
+    background: linear-gradient(115deg, var(--eco-forest) 0%, var(--eco-teal) 65%, var(--eco-water) 100%);
+    box-shadow: var(--eco-shadow-card);
+}
+.map-cta-inner h2 { margin: 0 0 6px; font-size: clamp(26px, 3vw, 34px); }
+.map-cta-inner p { margin: 0; max-width: 620px; color: rgba(255,255,255,0.88); }
+.map-cta-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.map-cta .btn-primary { background: #fff; color: var(--eco-forest); }
+.map-cta .btn-outline { background: transparent; color: #fff; border-color: rgba(255,255,255,0.6); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1180px) {
+    .map-toolbar { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .layer-toggles { grid-column: 1 / -1; }
+    .map-toolbar .btn { justify-self: start; }
+}
+@media (max-width: 980px) {
+    .map-layout { grid-template-columns: 1fr; }
+    .ranking-panel { position: static; max-height: none; }
+    .rank-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .param-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .detail-grid { grid-template-columns: 200px minmax(0, 1fr); }
+}
+@media (max-width: 700px) {
+    .map-hero { padding: 56px 0 50px; }
+    .map-toolbar { grid-template-columns: 1fr; }
+    .map-canvas { height: 440px; }
+    .map-legend { font-size: 12px; }
+    .rank-list { grid-template-columns: 1fr; }
+    .param-grid { grid-template-columns: 1fr; }
+    .detail-grid { grid-template-columns: 1fr; }
+    .detail-panel { padding: 16px; }
+    .subscore-chart li { grid-template-columns: 96px minmax(0, 1fr) 76px; gap: 8px; }
+    .detail-facts { grid-template-columns: 1fr; }
+    .map-cta-inner { padding: 26px 22px; }
+    .map-notice { left: 12px; top: 84px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .bar-fill, .pin, .rank-card { transition: none; }
+    .report-pin.mine { animation: none; }
+}
+
+/* ---------- Times New Roman everywhere ----------
+   Leaflet's own stylesheet sets sans-serif/monospace fonts on its
+   controls and popups, and <pre>/<code> default to monospace. */
+.leaflet-container,
+.leaflet-container a,
+.leaflet-control-zoom a,
+.leaflet-container a.leaflet-popup-close-button,
+.leaflet-control-attribution,
+.map-page pre, .map-page code, pre, code {
+    font-family: var(--eco-font);
+}

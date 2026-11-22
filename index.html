@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EcoGuard is a student prototype that helps Ha Noi residents learn about industrial wastewater pollution and record what they observe in local waterways.">
+    <title>EcoGuard | Home</title>
+    <link rel="icon" href="assets/ecoguard-logo.png">
+    <link rel="stylesheet" href="ecoguard.css">
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+
+<!-- ===== SHARED HEADER (same on every page; current page is highlighted) ===== -->
+<header class="site-header">
+    <nav class="site-navigation" aria-label="Main navigation">
+        <a href="index.html" class="brand" aria-label="EcoGuard home">
+            <img src="assets/ecoguard-logo.png" alt="" class="brand-logo" width="58" height="58">
+            <span class="brand-name">EcoGuard</span>
+        </a>
+
+        <ul class="primary-nav" id="primary-nav">
+            <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+            <li><a href="map.html">Interactive Map</a></li>
+            <li><a href="report.html">Report Pollution</a></li>
+            <li><a href="tracking.html">Track Reports</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+
+        <a href="report.html" class="nav-cta">+ New Report</a>
+
+        <!-- Mobile menu button (shown under 900px, handled in ecoguard.js) -->
+        <button class="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+</header>
+
+<main id="home">
+
+    <!-- ===== HERO (photo layers set in home.css, with fallbacks) ===== -->
+    <section class="photo-hero home-hero">
+        <div class="container home-hero-inner">
+            <div class="home-hero-copy" data-reveal="fade-up">
+                <p class="eyebrow light">STUDENT PROTOTYPE &middot; HA NOI</p>
+                <h1>Protect Our Water, Protect Our Future.</h1>
+                <p class="home-hero-lead">
+                    Learn how industrial wastewater can affect local rivers, lakes and canals,
+                    and record what you observe in one simple place.
+                </p>
+                <div class="home-hero-actions">
+                    <a href="report.html" class="btn btn-light">Report Pollution</a>
+                    <a href="map.html" class="btn btn-ghost-light">Explore the Map</a>
+                </div>
+            </div>
+
+            <aside class="home-hero-card" data-reveal="fade-left" aria-label="What you can do on EcoGuard">
+                <h2>What you can do here</h2>
+                <ul>
+                    <li><span aria-hidden="true">&#128205;</span> Explore a map of demonstration water-quality stations</li>
+                    <li><span aria-hidden="true">&#128221;</span> Record a pollution observation with photos</li>
+                    <li><span aria-hidden="true">&#128269;</span> Follow each report with its tracking ID</li>
+                </ul>
+                <p class="home-hero-card-note">Reports are stored only in your browser. This is a learning project, not an official service.</p>
+            </aside>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ECOGUARD (original team text) ===== -->
+    <section class="section home-intro" aria-labelledby="intro-title">
+        <div class="container home-intro-grid">
+            <div data-reveal="fade-up">
+                <p class="eyebrow">ABOUT ECOGUARD</p>
+                <h2 id="intro-title">Why we built EcoGuard</h2>
+                <p>
+                    We formed the EcoGuard team because residents can struggle to find
+                    clear information about industrial wastewater pollution and may not
+                    know where to report suspected incidents.
+                </p>
+                <p>
+                    We developed the EcoGuard app to give residents one place to learn
+                    about industrial wastewater pollution and report what they observe.
+                    Our goal is to raise public awareness of how industrial wastewater
+                    can affect local waterways and communities.
+                </p>
+                <a href="about.html" class="btn btn-outline">More about the team</a>
+            </div>
+
+            <!-- The Problem (original team text) -->
+            <article class="problem-card" data-reveal="fade-left" aria-labelledby="problem-title">
+                <figure class="problem-photo">
+                    <img src="assets/images/illustration-wastewater-discharge.jpg"
+                         alt="Illustration of wastewater flowing from a pipe into a river" loading="lazy">
+                </figure>
+                <div class="problem-body">
+                    <h3 id="problem-title">The Problem</h3>
+                    <p>
+                        When industrial wastewater is discharged without adequate treatment,
+                        pollutants can enter rivers, canals and streams. If you notice
+                        unusual water colour, persistent foam or a strong odour, record
+                        what you saw and where it happened.
+                    </p>
+                    <ul class="sign-list" aria-label="Signs to look out for">
+                        <li>Unusual colour</li>
+                        <li>Persistent foam</li>
+                        <li>Strong odour</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- ===== PROTOTYPE AT A GLANCE (all numbers come from the demo data) ===== -->
+    <section class="section-tight home-impact" aria-labelledby="impact-title">
+        <div class="container">
+            <h2 id="impact-title" class="visually-hidden">EcoGuard prototype at a glance</h2>
+            <div class="impact-grid">
+                <div class="impact-card" data-reveal="fade-up">
+                    <strong data-count="10">10</strong>
+                    <span>demonstration stations on the map</span>
+                    <small>Simulated readings</small>
+                </div>
+                <div class="impact-card" data-reveal="fade-up">
+                    <strong id="impactReports" data-count="0">0</strong>
+                    <span>reports in this browser's tracker</span>
+                    <small>Demo + your own</small>
+                </div>
+                <div class="impact-card" data-reveal="fade-up">
+                    <strong data-count="5">5</strong>
+                    <span>water-quality indicators in the severity score</span>
+                    <small>pH, DO, BOD&#8325;, COD, TSS</small>
+                </div>
+                <div class="impact-card" data-reveal="fade-up">
+                    <strong data-count="5">5</strong>
+                    <span>tracking stages for every report</span>
+                    <small>Submitted &rarr; Resolved</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== HOW TO REPORT (original three steps, plus tracking) ===== -->
+    <section class="section section-alt" id="guide" aria-labelledby="guide-title">
+        <div class="container">
+            <div class="section-heading center" data-reveal="fade-up">
+                <p class="eyebrow">HOW TO REPORT</p>
+                <h2 id="guide-title">Four simple steps</h2>
+                <p>Your safety comes first. Never touch polluted water or enter private or industrial sites.</p>
+            </div>
+            <ol class="steps-grid">
+                <li class="step-card" data-reveal="fade-up">
+                    <span class="step-num">1</span>
+                    <h3>Observe safely</h3>
+                    <p>Observe the water from a safe location.</p>
+                </li>
+                <li class="step-card" data-reveal="fade-up">
+                    <span class="step-num">2</span>
+                    <h3>Note the details</h3>
+                    <p>Note the location, date and what you saw, and take a clear photo if it is safe to do so.</p>
+                </li>
+                <li class="step-card" data-reveal="fade-up">
+                    <span class="step-num">3</span>
+                    <h3>Submit a report</h3>
+                    <p>Click Report Pollution and enter those details in the form.</p>
+                </li>
+                <li class="step-card" data-reveal="fade-up">
+                    <span class="step-num">4</span>
+                    <h3>Track progress</h3>
+                    <p>Use your tracking ID on Track Reports to follow the demo review stages.</p>
+                </li>
+            </ol>
+            <div class="center-actions" data-reveal="fade-up">
+                <a href="report.html" class="btn btn-primary">Report Pollution</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MAP PREVIEW ===== -->
+    <section class="section home-map" aria-labelledby="map-preview-title">
+        <div class="container home-map-grid">
+            <div class="home-map-copy" data-reveal="fade-up">
+                <p class="eyebrow">INTERACTIVE MAP</p>
+                <h2 id="map-preview-title">See water quality across Greater Ha Noi</h2>
+                <p>
+                    The map ranks ten demonstration stations, from inner-city canals to
+                    highland reservoirs, using the team's severity score. Community reports
+                    appear on the same map.
+                </p>
+                <p class="home-map-note"><span class="demo-chip">Simulated data</span> Station values are for learning only; locations are approximate.</p>
+                <a href="map.html" class="btn btn-primary">Open the Map</a>
+            </div>
+            <a href="map.html" class="home-map-preview" data-reveal="fade-left" aria-label="Open the interactive map">
+                <span class="preview-label">Most polluted demo stations</span>
+                <ol class="preview-rank" id="previewRank">
+                    <!-- Filled by home.js from the same formula as the map -->
+                </ol>
+                <span class="preview-cta">View all 10 stations &rarr;</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ===== RECENT REPORTS (from the shared report store) ===== -->
+    <section class="section section-alt" aria-labelledby="recent-title">
+        <div class="container">
+            <div class="recent-head" data-reveal="fade-up">
+                <div>
+                    <p class="eyebrow">RECENT REPORTS</p>
+                    <h2 id="recent-title">Latest community observations</h2>
+                </div>
+                <a href="tracking.html" class="btn btn-outline btn-small">All reports</a>
+            </div>
+            <div class="recent-grid" id="recentReports">
+                <!-- Filled by home.js -->
+            </div>
+            <p class="recent-note">Sample reports are demo data. Reports you submit are saved only in this browser.</p>
+        </div>
+    </section>
+
+    <!-- ===== FURTHER READING (original team research links) ===== -->
+    <section class="section" id="news" aria-labelledby="news-title">
+        <div class="container">
+            <div class="section-heading" data-reveal="fade-up">
+                <p class="eyebrow">FURTHER READING</p>
+                <h2 id="news-title">Industrial Wastewater News</h2>
+                <p>Articles the team used to learn about wastewater treatment in Vietnam. Links open external websites.</p>
+            </div>
+            <div class="news-grid">
+                <article class="news-card" data-reveal="fade-up">
+                    <p class="news-source">National Statistics Office of Vietnam</p>
+                    <h3>Wastewater Treatment in Vietnam</h3>
+                    <p>
+                        Vietnam's National Statistics Office reviews progress in
+                        wastewater treatment and explains why treatment capacity
+                        still varies across industrial parks.
+                    </p>
+                    <a href="https://www.nso.gov.vn/en/other-news/2025/01/the-status-of-wastewater-treatment-and-environmental-protection-in-vietnam-and-lessons-from-denmark/"
+                       target="_blank" rel="noopener noreferrer">
+                        Read the National Statistics Office article <span aria-hidden="true">&#8599;</span>
+                    </a>
+                </article>
+                <article class="news-card" data-reveal="fade-up">
+                    <p class="news-source">Department of Water Resources Management</p>
+                    <h3>Tay Ninh Expands Wastewater Monitoring</h3>
+                    <p>
+                        Tay Ninh is expanding automatic water monitoring to help
+                        track major sources of wastewater discharge.
+                    </p>
+                    <a href="https://dwrm.mae.gov.vn/tay-ninh-tang-cuong-kiem-soat-cac-nguon-xa-thai-lon-16550.htm"
+                       target="_blank" rel="noopener noreferrer">
+                        Read the Tay Ninh update (Vietnamese) <span aria-hidden="true">&#8599;</span>
+                    </a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FINAL CALL TO ACTION ===== -->
+    <section class="section-tight home-cta-wrap">
+        <div class="container">
+            <div class="home-cta" data-reveal="fade-up">
+                <div>
+                    <h2>Noticed something unusual in a waterway?</h2>
+                    <p>Record what you saw and where it happened. It only takes a few minutes.</p>
+                </div>
+                <div class="home-cta-actions">
+                    <a href="report.html" class="btn btn-light">Report Pollution</a>
+                    <a href="tracking.html" class="btn btn-ghost-light">Track Reports</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ===== SHARED FOOTER ===== -->
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <a href="index.html" class="footer-logo">
+                <img src="assets/ecoguard-logo.png" alt="" class="footer-brand-logo" width="57" height="57">
+                <span class="footer-brand-name">EcoGuard</span>
+            </a>
+            <p class="footer-description">
+                Protect Our Water, Protect Our Future. A student prototype that helps
+                residents learn about industrial wastewater pollution and record what
+                they observe in local waterways.
+            </p>
+        </div>
+
+        <div class="footer-column">
+            <h2>Quick Links</h2>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="map.html">Interactive Map</a></li>
+                <li><a href="report.html">Report Pollution</a></li>
+                <li><a href="tracking.html">Track Reports</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h2>Explore</h2>
+            <ul>
+                <li><a href="map.html#water-quality">Water Quality</a></li>
+                <li><a href="about.html#problem">Industrial Wastewater</a></li>
+                <li><a href="about.html#learn">Environmental Awareness</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h2>Get Involved</h2>
+            <p>Notice something unusual in a local waterway? Record what you saw and where it happened.</p>
+            <a href="report.html" class="footer-button">Submit a Report <span aria-hidden="true">&rarr;</span></a>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 EcoGuard. Protecting Water, Protecting Life. &middot; Student prototype. Reports and measurements shown are demo or simulated data.</p>
+        <p class="footer-tagline">Protecting Our Water, Protecting Our Future.</p>
+    </div>
+</footer>
+
+    <script src="ecoguard.js" defer></script>
+    <script src="stations.js" defer></script>
+    <script src="home.js" defer></script>
+
+</body>
+</html>

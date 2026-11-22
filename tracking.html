@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Track the progress of water pollution reports in the EcoGuard prototype.">
+    <title>Track Reports | EcoGuard</title>
+    <link rel="icon" href="assets/ecoguard-logo.png">
+    <link rel="stylesheet" href="ecoguard.css">
+    <link rel="stylesheet" href="tracking.css">
+</head>
+
+<body>
+
+<!-- ===== SHARED HEADER (same on every page; current page is highlighted) ===== -->
+<header class="site-header">
+    <nav class="site-navigation" aria-label="Main navigation">
+        <a href="index.html" class="brand" aria-label="EcoGuard home">
+            <img src="assets/ecoguard-logo.png" alt="" class="brand-logo" width="58" height="58">
+            <span class="brand-name">EcoGuard</span>
+        </a>
+
+        <ul class="primary-nav" id="primary-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="map.html">Interactive Map</a></li>
+            <li><a href="report.html">Report Pollution</a></li>
+            <li><a href="tracking.html" class="active" aria-current="page">Track Reports</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+
+        <a href="report.html" class="nav-cta">+ New Report</a>
+
+        <!-- Mobile menu button (shown under 900px, handled in ecoguard.js) -->
+        <button class="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+</header>
+
+    <!-- ================================
+         MAIN: MY REPORTS DASHBOARD
+         Report cards, counts and statistics are built by tracking.js
+         from demo reports + reports saved in this browser.
+    ================================= -->
+    <main class="track-dashboard">
+
+        <!-- Dashboard title and primary action -->
+        <section class="dashboard-header" aria-labelledby="page-title" data-reveal="fade-up">
+            <div class="dashboard-heading-copy">
+                <span class="dashboard-eyebrow">COMMUNITY IMPACT DASHBOARD</span>
+                <h1 id="page-title">My Reports</h1>
+                <p>Manage and track your reported environmental issues.</p>
+            </div>
+            <a href="report.html" class="new-report-btn">+ New Report</a>
+        </section>
+
+        <!-- Summary cards (numbers are calculated from the report records) -->
+        <section class="summary-cards" aria-label="Report summary" data-reveal="fade-up">
+            <article class="summary-card">
+                <div class="summary-top">
+                    <span class="summary-icon" aria-hidden="true">&#128196;</span>
+                    <span class="demo-chip">Demo data</span>
+                </div>
+                <p>Total Reports</p>
+                <h2 id="countTotal">6</h2>
+            </article>
+
+            <article class="summary-card">
+                <div class="summary-top">
+                    <span class="summary-icon" aria-hidden="true">&#8635;</span>
+                </div>
+                <p>In Progress</p>
+                <h2 id="countProgress">1</h2>
+            </article>
+
+            <article class="summary-card">
+                <div class="summary-top">
+                    <span class="summary-icon" aria-hidden="true">&#9201;</span>
+                </div>
+                <p>Pending Approval</p>
+                <h2 id="countPending">2</h2>
+            </article>
+
+            <article class="summary-card">
+                <div class="summary-top">
+                    <span class="summary-icon" aria-hidden="true">&#10003;</span>
+                </div>
+                <p>Completed</p>
+                <h2 id="countCompleted">3</h2>
+            </article>
+        </section>
+
+        <!-- Main dashboard columns: report list and statistics -->
+        <section class="dashboard-content">
+
+            <!-- Report cards -->
+            <section class="reports-section" aria-labelledby="reports-heading" data-reveal="fade-up">
+
+                <div class="panel-heading">
+                    <div>
+                        <h2 id="reports-heading">Your Reports</h2>
+                        <p>All issues you have reported</p>
+                    </div>
+                    <p class="results-count" id="resultsCount" aria-live="polite"></p>
+                </div>
+
+                <!-- Search and filters -->
+                <form class="report-toolbar" id="reportToolbar" role="search" onsubmit="return false;">
+                    <div class="toolbar-field toolbar-search">
+                        <label for="searchInput">Search</label>
+                        <input type="search" id="searchInput" placeholder="Search by ID, title or location">
+                    </div>
+                    <div class="toolbar-field">
+                        <label for="statusFilter">Status</label>
+                        <select id="statusFilter">
+                            <option value="all">All statuses</option>
+                            <optgroup label="Summary groups">
+                                <option value="group:pending">Pending Approval</option>
+                                <option value="group:progress">In Progress (any stage)</option>
+                                <option value="group:completed">Completed</option>
+                            </optgroup>
+                            <optgroup label="Workflow step">
+                                <option value="Submitted">Submitted</option>
+                                <option value="Under Review">Under Review</option>
+                                <option value="Verified">Verified</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Resolved">Resolved</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="toolbar-field">
+                        <label for="typeFilter">Type</label>
+                        <select id="typeFilter">
+                            <option value="all">All types</option>
+                            <option value="industrial">Industrial Wastewater</option>
+                            <option value="contamination">Water Contamination</option>
+                            <option value="other">Other Pollution</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-outline btn-small" id="clearFilters">Clear</button>
+                </form>
+
+                <div class="reports-grid" id="reportsGrid">
+                    <!-- Report cards are inserted here by tracking.js -->
+                </div>
+
+                <!-- Empty state (shown when no report matches) -->
+                <div class="empty-state" id="emptyState" hidden>
+                    <div class="empty-icon" aria-hidden="true">&#128269;</div>
+                    <h3>No reports match your search</h3>
+                    <p>Try a different ID, title or location, or clear the filters.</p>
+                    <button type="button" class="btn btn-primary btn-small" id="emptyClear">Clear filters</button>
+                </div>
+
+                <noscript>
+                    <p class="demo-notice">JavaScript is needed to show the report list.</p>
+                </noscript>
+            </section>
+
+            <!-- Report statistics sidebar -->
+            <aside class="statistics-section" aria-labelledby="statistics-heading" data-reveal="fade-up">
+                <h2 id="statistics-heading">Report Statistics</h2>
+                <p class="statistics-subtitle">Your reporting activity overview</p>
+
+                <div class="stat-item">
+                    <div class="stat-label">
+                        <span>This Month</span>
+                        <strong id="statThisMonth">&ndash;</strong>
+                    </div>
+                    <div class="stat-bar"><span id="barThisMonth"></span></div>
+                </div>
+
+                <div class="stat-item">
+                    <div class="stat-label">
+                        <span>Last Month</span>
+                        <strong id="statLastMonth">&ndash;</strong>
+                    </div>
+                    <div class="stat-bar"><span id="barLastMonth"></span></div>
+                </div>
+
+                <div class="stat-item">
+                    <div class="stat-label">
+                        <span>Average Resolution Time</span>
+                        <strong id="statAverage">&ndash;</strong>
+                    </div>
+                    <div class="stat-bar"><span id="barAverage"></span></div>
+                    <small class="stat-hint">From submission to "Resolved", for completed reports.</small>
+                </div>
+
+                <div class="statistics-note">
+                    <h3>Keep Making a Difference!</h3>
+                    <p>
+                        Your reports help raise awareness and contribute to
+                        protecting our water resources.
+                    </p>
+                </div>
+
+                <div class="my-reports-tools" id="myReportsTools" hidden>
+                    <p><strong id="myReportsCount">0</strong> of these reports were submitted in this browser.</p>
+                    <button type="button" class="btn btn-danger btn-small" id="clearMine">Clear my submitted reports</button>
+                </div>
+            </aside>
+
+        </section>
+
+        <p class="demo-notice" data-reveal="fade-up">
+            Note: Reports EG-2026-001 to EG-2026-006 and their statuses are sample data
+            for the EcoGuard student prototype. Reports you submit are stored only in this
+            browser (localStorage); no authority has reviewed them.
+        </p>
+
+    </main>
+
+<!-- ===== SHARED FOOTER ===== -->
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <a href="index.html" class="footer-logo">
+                <img src="assets/ecoguard-logo.png" alt="" class="footer-brand-logo" width="57" height="57">
+                <span class="footer-brand-name">EcoGuard</span>
+            </a>
+            <p class="footer-description">
+                Protect Our Water, Protect Our Future. A student prototype that helps
+                residents learn about industrial wastewater pollution and record what
+                they observe in local waterways.
+            </p>
+        </div>
+
+        <div class="footer-column">
+            <h2>Quick Links</h2>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="map.html">Interactive Map</a></li>
+                <li><a href="report.html">Report Pollution</a></li>
+                <li><a href="tracking.html">Track Reports</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h2>Explore</h2>
+            <ul>
+                <li><a href="map.html#water-quality">Water Quality</a></li>
+                <li><a href="about.html#problem">Industrial Wastewater</a></li>
+                <li><a href="about.html#learn">Environmental Awareness</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h2>Get Involved</h2>
+            <p>Notice something unusual in a local waterway? Record what you saw and where it happened.</p>
+            <a href="report.html" class="footer-button">Submit a Report <span aria-hidden="true">&rarr;</span></a>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 EcoGuard. Protecting Water, Protecting Life. &middot; Student prototype. Reports and measurements shown are demo or simulated data.</p>
+        <p class="footer-tagline">Protecting Our Water, Protecting Our Future.</p>
+    </div>
+</footer>
+
+    <script src="ecoguard.js" defer></script>
+    <script src="tracking.js" defer></script>
+
+</body>
+</html>

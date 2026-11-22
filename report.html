@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Report suspected water pollution to EcoGuard (student prototype).">
+    <title>Report Pollution | EcoGuard</title>
+    <link rel="icon" href="assets/ecoguard-logo.png">
+    <link rel="stylesheet" href="ecoguard.css">
+    <link rel="stylesheet" href="report.css">
+</head>
+
+<body>
+
+<!-- ===== SHARED HEADER (same on every page; current page is highlighted) ===== -->
+<header class="site-header">
+    <nav class="site-navigation" aria-label="Main navigation">
+        <a href="index.html" class="brand" aria-label="EcoGuard home">
+            <img src="assets/ecoguard-logo.png" alt="" class="brand-logo" width="58" height="58">
+            <span class="brand-name">EcoGuard</span>
+        </a>
+
+        <ul class="primary-nav" id="primary-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="map.html">Interactive Map</a></li>
+            <li><a href="report.html" class="active" aria-current="page">Report Pollution</a></li>
+            <li><a href="tracking.html">Track Reports</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+
+        <a href="report.html" class="nav-cta">+ New Report</a>
+
+        <!-- Mobile menu button (shown under 900px, handled in ecoguard.js) -->
+        <button class="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+</header>
+
+    <main class="report-container">
+
+        <!-- Hero: photo layers are set in report.css (with fallbacks) -->
+        <section class="report-heading" data-reveal="fade-up">
+            <p class="eyebrow">COMMUNITY REPORTING</p>
+            <h1>Report Water Pollution</h1>
+            <p>
+                Help protect our rivers, lakes and waterways. If you notice unusual water colour, chemical discharge, foul odours or other signs of possible industrial wastewater pollution, let EcoGuard know.
+            </p>
+        </section>
+
+        <div class="report-intro-note" data-reveal="fade-up">
+            <strong>Before you submit:</strong>
+            Provide the location, date and clear photos if it is safe to do so.
+            Do not touch or approach suspected contaminated water.
+        </div>
+
+        <!-- What happens after submitting (simulated workflow) -->
+        <section class="next-steps" aria-labelledby="next-steps-title" data-reveal="fade-up">
+            <h2 id="next-steps-title">What happens next? <span class="demo-chip">Prototype</span></h2>
+            <ol class="workflow-strip">
+                <li><span>1</span>Submitted</li>
+                <li><span>2</span>Under Review</li>
+                <li><span>3</span>Verified</li>
+                <li><span>4</span>In Progress</li>
+                <li><span>5</span>Resolved</li>
+            </ol>
+            <p>
+                Your report is saved in this browser and receives a tracking ID. In this student prototype
+                the report is <strong>not sent to any authority</strong>; the steps above show how a report could be followed.
+            </p>
+        </section>
+
+        <!-- Error summary (filled by report.js if validation fails) -->
+        <div id="formErrors" class="form-errors" role="alert" tabindex="-1" hidden></div>
+
+        <form id="pollutionForm" novalidate data-reveal="fade-up">
+
+            <fieldset>
+                <legend>Water Source Information</legend>
+
+                <label for="source">Type of Water Source *</label>
+                <select id="source" name="source" required aria-describedby="source-error">
+                    <option value="">Select a water source</option>
+                    <option value="River">River / Stream</option>
+                    <option value="Lake">Lake / Pond</option>
+                    <option value="Canal">Canal / Drainage</option>
+                    <option value="Groundwater">Groundwater / Well</option>
+                    <option value="Other">Other</option>
+                </select>
+                <p class="field-error" id="source-error"></p>
+
+                <label for="pollutionType">Suspected Pollution Type *</label>
+                <select id="pollutionType" name="pollutionType" required aria-describedby="pollutionType-error">
+                    <option value="">Select the closest type</option>
+                    <option value="industrial">Industrial Wastewater</option>
+                    <option value="contamination">Water Contamination</option>
+                    <option value="other">Other Pollution</option>
+                </select>
+                <p class="field-error" id="pollutionType-error"></p>
+
+                <label for="location">Pollution Location *</label>
+                <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    placeholder="Enter street, district or neighbourhood (e.g. Cau Giay, Hanoi)"
+                    required
+                    aria-describedby="location-help location-error"
+                >
+                <p class="help-text" id="location-help">Mentioning the district (e.g. Hoang Mai, Long Bien) lets us place an approximate marker on the map.</p>
+                <p class="field-error" id="location-error"></p>
+
+                <label for="date">Date Observed *</label>
+                <input
+                    type="date"
+                    id="date"
+                    name="date"
+                    required
+                    aria-describedby="date-error"
+                >
+                <p class="field-error" id="date-error"></p>
+
+            </fieldset>
+
+            <fieldset>
+                <legend>Photographic Evidence</legend>
+
+                <label for="photos">Upload Photos *</label>
+                <input
+                    type="file"
+                    id="photos"
+                    name="photos"
+                    accept="image/png, image/jpeg"
+                    multiple
+                    aria-describedby="photos-help photos-error"
+                >
+
+                <p class="help-text" id="photos-help">
+                    You can upload multiple JPG or PNG images (up to 6, max 5 MB each). Select more files to add them, or use &times; to remove one.
+                </p>
+                <p class="field-error" id="photos-error"></p>
+
+                <div id="imagePreview" aria-live="polite"></div>
+
+            </fieldset>
+
+            <fieldset>
+                <legend>Pollution Description</legend>
+
+                <label for="description">
+                    Describe the Pollution *
+                </label>
+
+                <textarea
+                    id="description"
+                    name="description"
+                    rows="5"
+                    placeholder="Describe what you observed: colour, smell, foam, dead fish, where the water came from..."
+                    required
+                    aria-describedby="description-count description-error"
+                ></textarea>
+                <p class="char-count" id="description-count">0 / at least 20 characters</p>
+                <p class="field-error" id="description-error"></p>
+
+                <label for="additional">
+                    Additional Observations
+                </label>
+
+                <textarea
+                    id="additional"
+                    name="additional"
+                    rows="3"
+                    placeholder="Any additional information..."
+                ></textarea>
+
+            </fieldset>
+
+            <fieldset>
+                <legend>Reporter Information</legend>
+
+                <label for="reporter">Your Name (Optional)</label>
+                <input
+                    type="text"
+                    id="reporter"
+                    name="reporter"
+                    placeholder="Enter your name"
+                >
+
+                <label for="email">Email Address (Optional)</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="example@email.com"
+                    aria-describedby="email-error"
+                >
+                <p class="field-error" id="email-error"></p>
+                <p class="help-text">Your details stay in this browser only (localStorage) and are not sent anywhere.</p>
+
+            </fieldset>
+
+            <button type="submit" class="submit-report-btn">Submit Report</button>
+
+        </form>
+
+        <!-- Success panel (shown only after a valid report has been saved) -->
+        <section id="successMessage" class="success-message" role="status" aria-live="polite" tabindex="-1" hidden>
+            <div class="success-icon" aria-hidden="true">&#10003;</div>
+            <h2>Thank you! Your report has been saved.</h2>
+            <p>Your tracking ID is</p>
+            <p class="success-id" id="successId">EG-0000-000</p>
+            <p class="success-note">
+                Keep this ID to follow your report on the Track Reports page.
+                (Prototype: the report is stored in this browser only and has not been sent to any authority.)
+            </p>
+            <div class="success-actions">
+                <a href="tracking.html" id="trackLink" class="btn btn-primary">Track Reports <span aria-hidden="true">&rarr;</span></a>
+                <a href="map.html" id="mapLink" class="btn btn-outline">View on Map</a>
+                <button type="button" id="newReportBtn" class="btn btn-outline">Submit Another Report</button>
+            </div>
+        </section>
+
+    </main>
+
+<!-- ===== SHARED FOOTER ===== -->
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <a href="index.html" class="footer-logo">
+                <img src="assets/ecoguard-logo.png" alt="" class="footer-brand-logo" width="57" height="57">
+                <span class="footer-brand-name">EcoGuard</span>
+            </a>
+            <p class="footer-description">
+                Protect Our Water, Protect Our Future. A student prototype that helps
+                residents learn about industrial wastewater pollution and record what
+                they observe in local waterways.
+            </p>
+        </div>
+
+        <div class="footer-column">
+            <h2>Quick Links</h2>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="map.html">Interactive Map</a></li>
+                <li><a href="report.html">Report Pollution</a></li>
+                <li><a href="tracking.html">Track Reports</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h2>Explore</h2>
+            <ul>
+                <li><a href="map.html#water-quality">Water Quality</a></li>
+                <li><a href="about.html#problem">Industrial Wastewater</a></li>
+                <li><a href="about.html#learn">Environmental Awareness</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h2>Get Involved</h2>
+            <p>Notice something unusual in a local waterway? Record what you saw and where it happened.</p>
+            <a href="report.html" class="footer-button">Submit a Report <span aria-hidden="true">&rarr;</span></a>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 EcoGuard. Protecting Water, Protecting Life. &middot; Student prototype. Reports and measurements shown are demo or simulated data.</p>
+        <p class="footer-tagline">Protecting Our Water, Protecting Our Future.</p>
+    </div>
+</footer>
+
+    <script src="ecoguard.js" defer></script>
+    <script src="report.js" defer></script>
+
+</body>
+</html>

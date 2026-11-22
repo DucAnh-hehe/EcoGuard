@@ -1,0 +1,185 @@
+/* =========================================================
+   ECOGUARD | ABOUT PAGE STYLES
+   Shared header, footer, buttons, badges: ecoguard.css
+========================================================= */
+
+/* ---------- Hero ---------- */
+.about-hero {
+    /* Brief photo first, then a team image, then the .photo-hero gradient. */
+    --hero-image: url("assets/images/about-community-river.jpg"), url("assets/images/team-industrial-site.avif");
+    padding: 92px 0 84px;
+}
+.about-hero h1 { max-width: 780px; margin: 0 0 16px; font-size: clamp(38px, 5.4vw, 62px); line-height: 1.06; letter-spacing: -0.6px; }
+.about-hero-lead { max-width: 640px; margin: 0 0 26px; color: rgba(255,255,255,0.9); font-size: 20px; }
+.about-jump { display: flex; flex-wrap: wrap; gap: 10px; }
+.about-jump a {
+    padding: 8px 16px;
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 999px;
+    color: #fff;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+.about-jump a:hover { background: rgba(255,255,255,0.16); }
+
+html { scroll-padding-top: 96px; }
+
+/* ---------- Cards ---------- */
+.about-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.about-card {
+    padding: 28px;
+    border: 1px solid var(--eco-border);
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: var(--eco-shadow-soft);
+}
+.about-card-wide {
+    grid-column: 1 / -1;
+    border-left: 6px solid var(--eco-leaf);
+    font-size: 18px;
+}
+.about-card h3 { margin: 0 0 12px; color: var(--eco-forest); font-size: 26px; }
+.about-card p { margin: 0 0 12px; }
+.about-icon {
+    display: grid;
+    place-items: center;
+    width: 50px;
+    height: 50px;
+    margin-bottom: 14px;
+    border-radius: 14px;
+    background: var(--eco-pale);
+    font-size: 24px;
+}
+.prototype-note {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin: 18px 0 0 !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--eco-pale-blue);
+    color: #415a5f;
+    font-size: 15px;
+}
+
+.check-list { display: grid; gap: 8px; margin: 0 0 12px; padding: 0; list-style: none; }
+.check-list li { position: relative; padding-left: 28px; }
+.check-list li::before {
+    content: "\2713";
+    position: absolute;
+    left: 0;
+    top: 1px;
+    display: grid;
+    place-items: center;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    color: #fff;
+    background: var(--eco-leaf);
+    font-size: 12px;
+    font-weight: 700;
+}
+.check-list.light li::before { color: var(--eco-forest); background: #d0f0ce; }
+
+/* ---------- Learn ---------- */
+.learn-feature {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    overflow: hidden;
+    margin-bottom: 22px;
+    border: 1px solid var(--eco-border);
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: var(--eco-shadow-card);
+}
+.learn-photo {
+    min-height: 300px;
+    /* Brief photo, then a team image, then a gradient. */
+    background:
+        url("assets/images/water-quality-lab.jpg") center / cover,
+        url("assets/images/team-wastewater-treatment.avif") center / cover,
+        linear-gradient(135deg, #123e32, #0d6a6c 60%, #145a73);
+}
+.learn-copy { padding: 34px; font-size: 18px; }
+.learn-copy h3 { margin: 0 0 14px; color: var(--eco-forest); font-size: 28px; }
+.learn-copy p { margin: 0 0 12px; }
+
+.learn-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.indicator-list { display: grid; gap: 10px; margin: 0 0 14px; }
+.indicator-list div { padding: 10px 12px; border-radius: 10px; background: var(--eco-pale); }
+.indicator-list dt { color: var(--eco-forest); font-weight: 700; }
+.indicator-list dd { margin: 2px 0 0; }
+.text-link { color: var(--eco-teal); font-weight: 700; }
+
+/* ---------- Community ---------- */
+.about-community {
+    --hero-image: url("assets/images/about-community-river.jpg"), url("assets/images/team-wastewater-treatment.avif");
+}
+.about-community .section-heading h2 { color: #fff; }
+.community-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.glass-card {
+    padding: 28px;
+    border: 1px solid rgba(255,255,255,0.24);
+    border-radius: 20px;
+    background: rgba(8,38,32,0.5);
+    backdrop-filter: blur(6px);
+}
+.glass-card h3 { margin: 0 0 12px; font-size: 26px; }
+.glass-card p { margin: 0 0 12px; color: rgba(255,255,255,0.9); }
+.glass-card .btn { margin-top: 6px; }
+
+/* ---------- Support ---------- */
+.support-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+.support-side { display: grid; gap: 22px; }
+.faq h3 { margin: 0 0 14px; color: var(--eco-forest); font-size: 26px; }
+.faq-item {
+    margin-bottom: 10px;
+    border: 1px solid var(--eco-border);
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: var(--eco-shadow-soft);
+    transition: border-color 0.2s ease;
+}
+.faq-item[open] { border-color: var(--eco-teal); }
+.faq-item summary {
+    position: relative;
+    padding: 16px 48px 16px 18px;
+    color: var(--eco-forest);
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+    content: "+";
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    color: var(--eco-teal);
+    font-size: 24px;
+    line-height: 1;
+    transform: translateY(-50%);
+    transition: transform 0.25s ease;
+}
+.faq-item[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+.faq-item p { margin: 0; padding: 0 18px 18px; color: #415a5f; }
+.faq-item a, .resource-list a { color: var(--eco-teal); font-weight: 700; }
+.resource-list { display: grid; gap: 8px; margin: 0; padding-left: 20px; }
+.contact-card { border-top: 4px solid var(--eco-teal); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+    .about-grid, .learn-grid, .community-grid, .support-grid { grid-template-columns: 1fr; }
+    .learn-feature { grid-template-columns: 1fr; }
+    .learn-photo { min-height: 220px; }
+}
+@media (max-width: 600px) {
+    .about-hero { padding: 64px 0 56px; }
+    .about-card, .glass-card { padding: 22px; }
+    .learn-copy { padding: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .faq-item summary::after { transition: none; }
+}

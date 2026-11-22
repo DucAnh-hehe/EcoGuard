@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive map of simulated water-quality stations and community pollution reports around Ha Noi (EcoGuard student prototype).">
+    <title>Interactive Map | EcoGuard</title>
+    <link rel="icon" href="assets/ecoguard-logo.png">
+    <!-- Leaflet (free, open-source map library) + OpenStreetMap tiles. No API key needed. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="ecoguard.css">
+    <link rel="stylesheet" href="map.css">
+</head>
+
+<body>
+
+<!-- ===== SHARED HEADER (same on every page; current page is highlighted) ===== -->
+<header class="site-header">
+    <nav class="site-navigation" aria-label="Main navigation">
+        <a href="index.html" class="brand" aria-label="EcoGuard home">
+            <img src="assets/ecoguard-logo.png" alt="" class="brand-logo" width="58" height="58">
+            <span class="brand-name">EcoGuard</span>
+        </a>
+
+        <ul class="primary-nav" id="primary-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="map.html" class="active" aria-current="page">Interactive Map</a></li>
+            <li><a href="report.html">Report Pollution</a></li>
+            <li><a href="tracking.html">Track Reports</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+
+        <a href="report.html" class="nav-cta">+ New Report</a>
+
+        <!-- Mobile menu button (shown under 900px, handled in ecoguard.js) -->
+        <button class="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+</header>
+
+<main>
+
+    <!-- ===== HERO (photo layers set in map.css, with fallbacks) ===== -->
+    <section class="photo-hero map-hero">
+        <div class="container map-hero-inner" data-reveal="fade-up">
+            <p class="eyebrow light">INTERACTIVE MAP</p>
+            <h1>Greater Ha Noi Water Quality Map</h1>
+            <p class="map-hero-lead">
+                Explore ten demonstration monitoring stations across Ha Noi's districts, lakes and rivers,
+                ranked by a pollution severity score, together with community pollution reports.
+            </p>
+            <p class="map-hero-note">
+                <span class="demo-chip">Simulated data</span>
+                Station readings are simulated demonstration values, not real monitoring data.
+                Marker positions are approximate.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== MAP + FILTERS + RANKING ===== -->
+    <section class="section-tight map-section" aria-labelledby="map-title">
+        <div class="container">
+
+            <div class="map-section-head">
+                <div>
+                    <h2 id="map-title">Explore the map</h2>
+                    <p>Click a marker or a ranking card to see its details. Click the map once to enable scroll-zoom.</p>
+                </div>
+                <p class="map-count" id="mapCount" aria-live="polite"></p>
+            </div>
+
+            <!-- Layer toggles and filters -->
+            <form class="map-toolbar" id="mapToolbar" onsubmit="return false;" aria-label="Map layers and filters">
+                <fieldset class="layer-toggles">
+                    <legend>Layers</legend>
+                    <label class="toggle"><input type="checkbox" id="layerStations" checked> <span class="toggle-dot station"></span> Stations (simulated)</label>
+                    <label class="toggle"><input type="checkbox" id="layerReports" checked> <span class="toggle-dot report"></span> Community reports</label>
+                </fieldset>
+
+                <div class="toolbar-field">
+                    <label for="categoryFilter">Report category</label>
+                    <select id="categoryFilter">
+                        <option value="all">All categories</option>
+                        <option value="industrial">Industrial Wastewater</option>
+                        <option value="contamination">Water Contamination</option>
+                        <option value="other">Other Pollution</option>
+                    </select>
+                </div>
+
+                <div class="toolbar-field">
+                    <label for="statusFilter">Report status</label>
+                    <select id="statusFilter">
+                        <option value="all">All statuses</option>
+                        <option value="pending">Pending (Submitted / Under Review)</option>
+                        <option value="progress">In Progress (Verified / In Progress)</option>
+                        <option value="completed">Resolved</option>
+                    </select>
+                </div>
+
+                <div class="toolbar-field">
+                    <label for="severityFilter">Severity</label>
+                    <select id="severityFilter">
+                        <option value="all">All levels</option>
+                        <option value="Critical">Critical (75&ndash;100)</option>
+                        <option value="High">High (50&ndash;74)</option>
+                        <option value="Moderate">Moderate (25&ndash;49)</option>
+                        <option value="Low">Low (0&ndash;24)</option>
+                        <option value="Unassessed">Unassessed (new reports)</option>
+                    </select>
+                </div>
+
+                <button type="button" class="btn btn-outline btn-small" id="resetFilters">Reset</button>
+            </form>
+
+            <div class="map-layout">
+
+                <div class="map-column">
+                    <div class="map-frame">
+                        <div id="map" class="map-canvas" role="region" aria-label="Map of Ha Noi with stations and reports"></div>
+                        <!-- Shown if the map library or map tiles cannot load -->
+                        <p class="map-notice" id="mapNotice" role="status" hidden></p>
+                        <div class="map-legend" aria-label="Map legend">
+                            <span><i class="dot" style="background:#c93b2b"></i>Critical</span>
+                            <span><i class="dot" style="background:#df6d2d"></i>High</span>
+                            <span><i class="dot" style="background:#d49b27"></i>Moderate</span>
+                            <span><i class="dot" style="background:#25845e"></i>Low</span>
+                            <span><i class="dot report-dot"></i>Report</span>
+                        </div>
+                    </div>
+
+                    <!-- Details for the selected station or report (filled by map.js) -->
+                    <section class="detail-panel" id="detailPanel" aria-live="polite" tabindex="-1">
+                        <p class="detail-empty">Select a station or a report to see its details here.</p>
+                    </section>
+                </div>
+
+                <!-- Original team ranking sidebar (kept and restyled) -->
+                <aside class="ranking-panel" aria-labelledby="ranking-title">
+                    <div class="ranking-head">
+                        <h2 id="ranking-title">Ha Noi Pollution Ranking (Most &rarr; Least)</h2>
+                        <p>Severity score (0&ndash;100) from pH deviation, DO depletion, BOD&#8325;, COD, and TSS across districts, lakes, and rivers.</p>
+                        <div class="legend-strip">
+                            <span class="legend-item"><i class="dot" style="background:#c93b2b"></i>Critical (75&ndash;100)</span>
+                            <span class="legend-item"><i class="dot" style="background:#df6d2d"></i>High (50&ndash;74)</span>
+                            <span class="legend-item"><i class="dot" style="background:#d49b27"></i>Moderate (25&ndash;49)</span>
+                            <span class="legend-item"><i class="dot" style="background:#25845e"></i>Low (0&ndash;24)</span>
+                        </div>
+                    </div>
+                    <ol class="rank-list" id="rankList"></ol>
+                </aside>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WATER QUALITY EXPLAINER ===== -->
+    <section class="section section-alt" id="water-quality" aria-labelledby="wq-title">
+        <div class="container">
+            <div class="section-heading center" data-reveal="fade-up">
+                <p class="eyebrow">WATER QUALITY</p>
+                <h2 id="wq-title">What the numbers mean</h2>
+                <p>
+                    Each station's severity score combines five common water-quality indicators.
+                    The ranges below come from the ten simulated stations in this demo dataset.
+                </p>
+            </div>
+
+            <div class="param-grid">
+                <article class="param-card" data-reveal="fade-up">
+                    <h3>pH <small>acidity / alkalinity</small></h3>
+                    <p>Neutral water is close to pH 7. Strongly acidic or alkaline water can harm fish and plants and may point to chemical discharge.</p>
+                    <p class="param-meta"><strong>Score weight:</strong> 12% &middot; distance from pH 7</p>
+                    <p class="param-range" data-range="ph"></p>
+                </article>
+                <article class="param-card" data-reveal="fade-up">
+                    <h3>DO <small>dissolved oxygen</small></h3>
+                    <p>Fish and other aquatic life need oxygen dissolved in water. Low DO often means organic waste is being broken down.</p>
+                    <p class="param-meta"><strong>Score weight:</strong> 25% &middot; lower is worse</p>
+                    <p class="param-range" data-range="do"></p>
+                </article>
+                <article class="param-card" data-reveal="fade-up">
+                    <h3>BOD&#8325; <small>biochemical oxygen demand</small></h3>
+                    <p>How much oxygen microbes use over five days to break down organic matter. High values suggest sewage or organic wastewater.</p>
+                    <p class="param-meta"><strong>Score weight:</strong> 24% &middot; higher is worse</p>
+                    <p class="param-range" data-range="bod5"></p>
+                </article>
+                <article class="param-card" data-reveal="fade-up">
+                    <h3>COD <small>chemical oxygen demand</small></h3>
+                    <p>Oxygen needed to chemically break down pollutants, including substances microbes cannot digest, such as some industrial chemicals.</p>
+                    <p class="param-meta"><strong>Score weight:</strong> 22% &middot; higher is worse</p>
+                    <p class="param-range" data-range="cod"></p>
+                </article>
+                <article class="param-card" data-reveal="fade-up">
+                    <h3>TSS <small>total suspended solids &middot; turbidity</small></h3>
+                    <p>Particles floating in the water that make it cloudy. This dataset has no separate turbidity reading, so TSS is used as the closest indicator.</p>
+                    <p class="param-meta"><strong>Score weight:</strong> 17% &middot; higher is worse</p>
+                    <p class="param-range" data-range="tss"></p>
+                </article>
+                <article class="param-card param-card-muted" data-reveal="fade-up">
+                    <h3>Heavy metals <small>lead, mercury, cadmium&hellip;</small></h3>
+                    <p>Metals from some industrial processes can build up in fish and sediment. They need laboratory testing.</p>
+                    <p class="param-meta"><strong>Not measured in demo dataset.</strong> Not included in the score.</p>
+                </article>
+            </div>
+
+            <div class="formula-box" data-reveal="fade-up">
+                <h3>How the severity score is calculated</h3>
+                <p>Each reading is turned into a 0&ndash;100 sub-score, then the sub-scores are weighted and added:</p>
+                <pre><code>pH  sub-score = |pH &minus; 7| &divide; 2.5 &times; 100
+DO  sub-score = (8 &minus; DO) &divide; 7.5 &times; 100
+BOD sub-score = BOD&#8325; &divide; 60 &times; 100
+COD sub-score = COD &divide; 160 &times; 100
+TSS sub-score = TSS &divide; 180 &times; 100   (each limited to 0&ndash;100)
+
+Score = 0.12&middot;pH + 0.25&middot;DO + 0.24&middot;BOD + 0.22&middot;COD + 0.17&middot;TSS</code></pre>
+                <p class="formula-note">
+                    This formula was designed by the EcoGuard team for learning purposes. It is not an official
+                    water-quality index, and the station values are simulated.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CALL TO ACTION ===== -->
+    <section class="section map-cta">
+        <div class="container map-cta-inner" data-reveal="fade-up">
+            <div>
+                <h2>Seen something unusual in a waterway?</h2>
+                <p>Record what you saw. Your report gets a tracking ID and appears on this map with an approximate marker.</p>
+            </div>
+            <div class="map-cta-actions">
+                <a href="report.html" class="btn btn-primary">Report Pollution</a>
+                <a href="tracking.html" class="btn btn-outline">Track Reports</a>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ===== SHARED FOOTER ===== -->
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <a href="index.html" class="footer-logo">
+                <img src="assets/ecoguard-logo.png" alt="" class="footer-brand-logo" width="57" height="57">
+                <span class="footer-brand-name">EcoGuard</span>
+            </a>
+            <p class="footer-description">
+                Protect Our Water, Protect Our Future. A student prototype that helps
+                residents learn about industrial wastewater pollution and record what
+                they observe in local waterways.
+            </p>
+        </div>
+
+        <div class="footer-column">
+            <h2>Quick Links</h2>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="map.html">Interactive Map</a></li>
+                <li><a href="report.html">Report Pollution</a></li>
+                <li><a href="tracking.html">Track Reports</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h2>Explore</h2>
+            <ul>
+                <li><a href="map.html#water-quality">Water Quality</a></li>
+                <li><a href="about.html#problem">Industrial Wastewater</a></li>
+                <li><a href="about.html#learn">Environmental Awareness</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h2>Get Involved</h2>
+            <p>Notice something unusual in a local waterway? Record what you saw and where it happened.</p>
+            <a href="report.html" class="footer-button">Submit a Report <span aria-hidden="true">&rarr;</span></a>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 EcoGuard. Protecting Water, Protecting Life. &middot; Student prototype. Reports and measurements shown are demo or simulated data.</p>
+        <p class="footer-tagline">Protecting Our Water, Protecting Our Future.</p>
+    </div>
+</footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" crossorigin="anonymous" defer></script>
+    <script src="ecoguard.js" defer></script>
+    <script src="stations.js" defer></script>
+    <script src="map.js" defer></script>
+
+</body>
+</html>
