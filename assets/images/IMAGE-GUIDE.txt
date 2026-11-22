@@ -1,0 +1,51 @@
+ECOGUARD IMAGE ASSET GUIDE
+==========================
+
+Put photos in this folder (assets/images/) using the EXACT filenames below.
+Until a photo is added, every page shows a fallback instead (a team image
+or a green/teal gradient), so nothing looks broken.
+
+PHOTOS TO ADD (from the project brief)
+--------------------------------------
+1) home-hero-waterway.jpg
+   Used on: index.html - top hero banner.
+   Look for: a wide (16:9 or wider) photo of a Ha Noi river, lake or canal.
+   Fallback now: illustration-wastewater-discharge.jpg
+
+2) industrial-wastewater-hero.jpg
+   Used on: report.html - top hero banner.
+   Look for: an industrial waterway, outfall near a river or wastewater canal.
+   Fallback now: team-industrial-site.avif
+
+3) map-waterway-context.jpg
+   Used on: map.html hero and tracking.html dashboard banner.
+   Look for: an aerial or wide view of a river or canal network.
+   Fallback now: team-wastewater-treatment.avif
+
+4) water-quality-lab.jpg
+   Used on: about.html - "Water Pollution Awareness" feature photo.
+   Look for: water sampling or testing (test tubes, sample bottles, field kit).
+   Fallback now: team-wastewater-treatment.avif
+
+5) about-community-river.jpg
+   Used on: about.html - top hero and the "Community" section background.
+   Look for: people near a river, a clean-up activity or a riverside path.
+   Fallback now: team-industrial-site.avif / team-wastewater-treatment.avif
+
+Tips
+- Landscape orientation, at least 1600 px wide, ideally under 400 KB (JPG).
+- Avoid text, logos and watermarks. Pages place a dark overlay on heroes,
+  so most photos stay readable.
+- Suggested free sources: Unsplash or Pexels. Check the licence and any
+  attribution requirement before publishing the site.
+
+IMAGES ALREADY IN THIS FOLDER (team assets - keep them)
+-------------------------------------------------------
+- illustration-wastewater-discharge.jpg  Home "The Problem" card + fallback
+- team-industrial-site.avif              fallback for report/about heroes
+- team-wastewater-treatment.avif         fallback for map/tracking/about
+- team-originals/cartoon2.jpg            original team illustration
+- Map station photos are the team's original Wikimedia Commons links
+  (in stations.js). If one fails to load, a drawn placeholder is shown.
+
+The team's untouched original files are in _original-backup/.
